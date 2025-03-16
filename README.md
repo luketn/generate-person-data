@@ -12,13 +12,13 @@ A Java application that generates synthetic person records with AI-generated bio
 
 - Java 21
 - Maven
-- Local AI API server (LM Studio) running on http://localhost:1234
+- Local AI API server ([LM Studio](https://lmstudio.ai/)) running on http://localhost:1234
 
 ## Setup
 
 1. Clone the repository
 2. Build with Maven:
-   ```
+   ```bash
    mvn clean package
    ```
 3. Make sure your local AI API server is running (compatible with OpenAI API format)
@@ -27,14 +27,14 @@ A Java application that generates synthetic person records with AI-generated bio
 
 Run the application to generate 1 million random person records:
 
-```
-java -cp target/test-faker-1.0-SNAPSHOT.jar com.mycodefu.Main
+```bash
+java -jar target/generate-data.jar
 ```
 
 To test the biography generation separately:
 
-```
-java -cp target/test-faker-1.0-SNAPSHOT.jar com.mycodefu.FetchBio
+```bash
+java -cp target/generate-data.jar com.mycodefu.FetchBio
 ```
 
 ## Technical Details
