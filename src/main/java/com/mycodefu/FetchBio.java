@@ -18,7 +18,7 @@ public class FetchBio {
             {
                 "model": "phi-4@4bit",
                 "messages": [
-                    { "role": "system", "content": "You are a bio writer. When given a name, age and profession write a bio in two short sentences for that person. Include a comment about their family. Avoid the words meticulous, dedicated, experienced and accomplished." },
+                    { "role": "system", "content": "You are a bio writer. When given a name, age and profession write a bio in two short sentences for that person. Avoid the words meticulous, dedicated, experienced and accomplished." },
                     { "role": "user", "content": "Name: %s, Age: %d, Profession: %s" }
                 ],
                 "temperature": 0.7,
