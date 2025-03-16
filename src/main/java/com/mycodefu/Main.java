@@ -36,7 +36,7 @@ public class Main {
         //write the records to the file
         Faker faker = Faker.instance();
 
-        int total = 10;
+        int total = 10_000;
         long startTime = System.currentTimeMillis();
         long lastIterationTime = startTime;
         double avgIterationTime = 0;
