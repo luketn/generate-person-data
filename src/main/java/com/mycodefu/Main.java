@@ -36,7 +36,7 @@ public class Main {
         //write the records to the file
         Faker faker = Faker.instance();
 
-        int total = 10_000;
+        int total = 10_000-6695+5000;
         long startTime = System.currentTimeMillis();
         long lastIterationTime = startTime;
         double avgIterationTime = 0;
@@ -68,8 +68,7 @@ public class Main {
                            " ".repeat(50 - percentage / 2) + "] ETA: " + timeLeft + " | " + i + "/" + total +
                            " completed (" + (total - i) + " remaining)";
             } else {
-                progress = "Progress: " + percentage + "% [" + "=".repeat(percentage / 2) +
-                           " ".repeat(50 - percentage / 2) + "] ETA: calculating... | " + i + "/" + total +
+                progress = "Progress: " + percentage + "% [" + " ".repeat(50) + "] ETA: calculating... | " + i + "/" + total +
                            " completed (" + (total - i) + " remaining)";
             }
             if (i > 0) {
