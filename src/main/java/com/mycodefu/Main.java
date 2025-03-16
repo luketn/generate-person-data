@@ -104,8 +104,14 @@ public class Main {
             (int)(totalTimeMillis % 3600000 / 60000), 
             (int)(totalTimeMillis % 60000 / 1000));
             
-        // Print 100% progress when done with total execution time
-        System.out.print("\rProgress: 100% [" + "=".repeat(50) + "] Completed in: " + totalTime + " ".repeat(30));
+        // Calculate average time per iteration
+        double avgTimePerIteration = (double)totalTimeMillis / total;
+        String avgTimeFormatted = String.format("%.2f", avgTimePerIteration);
+            
+        // Print 100% progress when done with total execution time and average time per iteration
+        System.out.print("\rProgress: 100% [" + "=".repeat(50) + 
+            "] Completed in: " + totalTime + 
+            " | Avg time per record: " + avgTimeFormatted + " ms" + " ".repeat(30));
         System.out.println();
     }
 }
