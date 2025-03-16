@@ -48,3 +48,10 @@ java -cp target/generate-data.jar com.mycodefu.FetchBio
 
 - JavaFaker 1.0.2
 - Jackson Databind 2.17.2
+
+## Example Full Run
+Here's an example final output running on a MacBook Pro Apple Silicon Max series laptop using local AI model Phi 4 (MLX) hosted on LM Studio:
+```bash
+Progress: 100% [==================================================] Completed in: 03:41:36 | Avg time per record: 1601.00 ms
+```
+The model is running at ~55 tokens/s.
