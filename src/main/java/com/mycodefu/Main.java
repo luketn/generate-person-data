@@ -12,8 +12,10 @@ import java.nio.file.StandardOpenOption;
 import static com.mycodefu.FetchBio.bioFor;
 
 public class Main {
+
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
     public record Person(
-            String id,
             String name,
             int age,
             String job,
@@ -39,16 +41,14 @@ public class Main {
             System.out.println("Bio result: " + bio);
 
             Person person = new Person(
-                    null,
                     name,
                     age,
                     profession,
                     bio
             );
-            System.out.println("Inserting person: " + person);
             String result;
             try {
-                result = new ObjectMapper().writeValueAsString(person) + "\n";
+                result = objectMapper.writeValueAsString(person) + "\n";
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
