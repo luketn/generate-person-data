@@ -33,10 +33,44 @@ public class Main {
         Faker faker = Faker.instance();
 
         int total = 10;
+        long startTime = System.currentTimeMillis();
+        long lastIterationTime = startTime;
+        double avgIterationTime = 0;
+        
         for (int i = 0; i < total; i++) {
-            // Calculate and display progress percentage
+            // Calculate progress percentage
             int percentage = (i * 100) / total;
-            System.out.print("\rProgress: " + percentage + "% [" + "=".repeat(percentage / 2) + " ".repeat(50 - percentage / 2) + "] (" + i + "/" + total + ")");
+            
+            // Calculate time estimates
+            long currentTime = System.currentTimeMillis();
+            if (i > 0) {
+                long iterationTime = currentTime - lastIterationTime;
+                // Exponential moving average with alpha=0.1
+                avgIterationTime = (i == 1) ? iterationTime : (0.1 * iterationTime + 0.9 * avgIterationTime);
+                
+                // Estimate time remaining in seconds
+                long remainingIterations = total - i;
+                double estimatedSecondsLeft = (avgIterationTime * remainingIterations) / 1000.0;
+                
+                // Format the time remaining
+                String timeLeft = String.format("%02d:%02d:%02d", 
+                    (int)(estimatedSecondsLeft / 3600), 
+                    (int)(estimatedSecondsLeft % 3600 / 60), 
+                    (int)(estimatedSecondsLeft % 60));
+                
+                // Display progress bar with time estimate and completion count
+                System.out.print("\rProgress: " + percentage + "% [" + "=".repeat(percentage / 2) + 
+                    " ".repeat(50 - percentage / 2) + "] ETA: " + timeLeft + " | " + i + "/" + total + 
+                    " completed (" + (total - i) + " remaining)"
+                    + " ".repeat(20)
+                );
+            } else {
+                System.out.print("\rProgress: " + percentage + "% [" + "=".repeat(percentage / 2) + 
+                    " ".repeat(50 - percentage / 2) + "] ETA: calculating... | " + i + "/" + total + 
+                    " completed (" + (total - i) + " remaining)");
+            }
+            
+            lastIterationTime = currentTime;
             
             String name = faker.name().fullName();
             int age = faker.number().numberBetween(18, 65);
@@ -62,8 +96,16 @@ public class Main {
 
         //close the file
         outputStream.close();
-        // Print 100% progress when done
-        System.out.print("\rProgress: 100% [" + "=".repeat(50) + "]");
-        System.out.println("\nCompleted!");
+        
+        // Calculate total execution time
+        long totalTimeMillis = System.currentTimeMillis() - startTime;
+        String totalTime = String.format("%02d:%02d:%02d", 
+            (int)(totalTimeMillis / 3600000), 
+            (int)(totalTimeMillis % 3600000 / 60000), 
+            (int)(totalTimeMillis % 60000 / 1000));
+            
+        // Print 100% progress when done with total execution time
+        System.out.print("\rProgress: 100% [" + "=".repeat(50) + "] Completed in: " + totalTime + " ".repeat(30));
+        System.out.println();
     }
 }
