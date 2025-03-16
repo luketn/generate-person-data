@@ -32,13 +32,16 @@ public class Main {
         //write the records to the file
         Faker faker = Faker.instance();
 
-        for (int i = 0; i < 1_000_000; i++) {
+        int total = 10;
+        for (int i = 0; i < total; i++) {
+            // Calculate and display progress percentage
+            int percentage = (i * 100) / total;
+            System.out.print("\rProgress: " + percentage + "% [" + "=".repeat(percentage / 2) + " ".repeat(50 - percentage / 2) + "] (" + i + "/" + total + ")");
+            
             String name = faker.name().fullName();
             int age = faker.number().numberBetween(18, 65);
             String profession = faker.company().profession();
-            System.out.println("Requesting bio for: " + name + ", " + age + ", " + profession);
             String bio = bioFor(name, age, profession);
-            System.out.println("Bio result: " + bio);
 
             Person person = new Person(
                     name,
@@ -59,5 +62,8 @@ public class Main {
 
         //close the file
         outputStream.close();
+        // Print 100% progress when done
+        System.out.print("\rProgress: 100% [" + "=".repeat(50) + "]");
+        System.out.println("\nCompleted!");
     }
 }
